@@ -250,10 +250,15 @@ app.get('/api/dashboard', authenticate, (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+// simple plain-text health endpoint (helpful for platform checks)
+app.get('/health', (req, res) => res.status(200).send('ok'));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  const addr = server.address();
+  const host = addr && addr.address ? addr.address : '0.0.0.0';
+  const port = addr && addr.port ? addr.port : PORT;
+  console.log(`Server running on http://${host}:${port}`);
 });
