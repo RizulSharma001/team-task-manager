@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Task Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">Team Task Manager</div>
+      <nav>
+        <button id="nav-dashboard" class="nav-btn active">Dashboard</button>
+        <button id="nav-projects" class="nav-btn">Projects</button>
+        <button id="nav-account" class="nav-btn">Account</button>
+        <button id="logoutBtn" class="nav-btn secondary">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="authSection" class="panel auth-panel">
+        <div class="auth-box">
+          <h1>Welcome Back</h1>
+          <div id="authError" class="alert hidden"></div>
+          <form id="loginForm" class="auth-form">
+            <h2>Login</h2>
+            <label>Email<input type="email" id="loginEmail" required /></label>
+            <label>Password<input type="password" id="loginPassword" required /></label>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <form id="signupForm" class="auth-form hidden">
+            <h2>Sign Up</h2>
+            <label>Name<input type="text" id="signupName" required /></label>
+            <label>Email<input type="email" id="signupEmail" required /></label>
+            <label>Password<input type="password" id="signupPassword" required /></label>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+          <div class="auth-switch">
+            <span id="switchToSignup">New here? Sign up</span>
+            <span id="switchToLogin" class="hidden">Already have an account? Login</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboardSection" class="panel hidden">
+        <div class="dashboard-grid">
+          <div class="card summary-card">
+            <h3>Task status</h3>
+            <ul id="statusSummary"></ul>
+          </div>
+          <div class="card summary-card">
+            <h3>Overdue tasks</h3>
+            <p id="overdueCount">0</p>
+          </div>
+          <div class="card summary-card">
+            <h3>Assigned to me</h3>
+            <ul id="assignedTasks"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="projectsSection" class="panel hidden">
+        <div class="section-header">
+          <h2>Projects</h2>
+          <button id="newProjectBtn" class="btn">New Project</button>
+        </div>
+        <div class="split-panel">
+          <div class="project-list card" id="projectList"></div>
+          <div class="project-details card hidden" id="projectDetailCard">
+            <div class="section-header">
+              <div>
+                <h3 id="projectTitle">Select a project</h3>
+                <p id="projectDescription"></p>
+                <p class="meta">Owner: <span id="projectOwner"></span></p>
+              </div>
+            </div>
+            <div id="projectMeta" class="project-meta"></div>
+            <div class="task-actions">
+              <button id="newTaskBtn" class="btn">Add Task</button>
+              <button id="manageMembersBtn" class="btn secondary">Manage Members</button>
+            </div>
+            <div id="tasksContainer"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="accountSection" class="panel hidden">
+        <div class="card profile-card">
+          <h2>Account</h2>
+          <p><strong>Name:</strong> <span id="accountName"></span></p>
+          <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+          <p><strong>Role:</strong> <span id="accountRole"></span></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
