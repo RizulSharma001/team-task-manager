@@ -1,42 +1,63 @@
-Team Task Manager
-=================
 
-Description
------------
-A full-stack team task management app with JWT authentication, role-based access control, and SQLite storage.
+team-task-manager — README (submission)
+=====================================
 
-Features
---------
-- Signup / Login
-- Admin / Member roles
-- Project creation and team assignment
-- Task creation, assignment, status updates, and overdue tracking
-- Dashboard summary of tasks and overdue items
+Live Application URL:
+---------------------
+Paste your Railway URL here after deploy: https://
 
-Quick Start
------------
-1. Install dependencies:
+GitHub Repository:
+------------------
+https://github.com/RizulSharma001/team-task-manager
+
+What this repo contains
+------------------------
+- Express + SQLite backend (server.js, db.js)
+- Vanilla SPA frontend (public/index.html, public/app.js, public/styles.css)
+- Deployment helpers: .env.example, railway.toml
+
+Quick Local Run (for demo recording)
+----------------------------------
+1. Install dependencies (only if not already installed):
    npm install
-
-2. Copy `.env.example` to `.env` and set a secret:
-   JWT_SECRET=your_secure_secret_here
-
-3. Start the app locally:
+2. Start the app:
    npm start
-
-4. Open in browser:
+3. Open in browser:
    http://localhost:3000
 
-Deployment
-----------
-- Railway-friendly SQLite app with `PORT` and `JWT_SECRET` support.
-- Use `railway.toml` to deploy with Node.js detection.
-- For persistence, configure a Railway volume mount for the `data/` folder.
-
-Default seeded admin account
-----------------------------
+Seeded admin (local)
+--------------------
 Email: admin@taskmanager.local
 Password: Admin123!
+
+Railway deployment notes
+------------------------
+- Set environment variable `JWT_SECRET` in Railway variables before deploy.
+- (Optional) Set `PORT=3000`.
+- Add a persistent disk and mount to `/app/data` for SQLite persistence.
+- If Railway build fails with native sqlite errors, contact me and I will replace driver with a pure-JS alternative.
+
+2-minute Demo Script (follow when recording)
+------------------------------------------
+0:00–0:10 — Show project home (`http://localhost:3000`) signed out.
+0:10–0:30 — Login as seeded admin (admin@taskmanager.local / Admin123!).
+0:30–0:55 — Create a new Project (Projects → New Project → Save).
+0:55–1:15 — Create a Task inside the project (title, optional assignee, due date) and save.
+1:15–1:35 — Open Dashboard, show task counts and overdue summary.
+1:35–2:00 — Mention GitHub repo URL and that the live URL will be provided once Railway finishes deploying.
+
+Files to submit
+---------------
+- README.txt (this file)
+- Link to live app (Railway)
+- Link to GitHub repo
+- Demo video (2–5 minutes)
+
+Contact / Notes
+---------------
+If Railway build fails or you need the live URL sooner, run locally and record the demo; I can help debug deployment logs and push a hotfix if necessary.
+
+Good luck — paste the Railway URL when available and I'll run smoke tests.
 
 Notes
 -----
