@@ -18,21 +18,31 @@ Quick Start
 1. Install dependencies:
    npm install
 
-2. Start the app locally:
+2. Copy `.env.example` to `.env` and set a secret:
+   JWT_SECRET=your_secure_secret_here
+
+3. Start the app locally:
    npm start
 
-3. Open in browser:
+4. Open in browser:
    http://localhost:3000
 
 Deployment
 ----------
 - Railway-friendly SQLite app with `PORT` and `JWT_SECRET` support.
-- Ensure `data` folder is writable in the deployment environment.
+- Use `railway.toml` to deploy with Node.js detection.
+- For persistence, configure a Railway volume mount for the `data/` folder.
 
 Default seeded admin account
 ----------------------------
 Email: admin@taskmanager.local
 Password: Admin123!
+
+Notes
+-----
+- The first seeded admin account is available immediately after startup.
+- Any new registered user can log in as a member and be added to projects by an admin.
+- The `data` directory is ignored by git so local state is not committed.
 
 Notes
 -----
