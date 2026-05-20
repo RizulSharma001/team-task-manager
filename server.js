@@ -2,7 +2,15 @@ const path = require('path');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const db = require('./db');
+// load DB with diagnostics so startup errors appear in container logs
+let db;
+try {
+  db = require('./db');
+} catch (e) {
+  console.error('Failed to initialize database:', e && e.stack ? e.stack : e);
+  // exit so platform logs capture the error and deployment shows the failure reason
+  process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +20,17 @@ const VALID_STATUSES = ['To Do', 'In Progress', 'Review', 'Done'];
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// global error handlers to make sure unexpected failures are logged
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught exception:', err && err.stack ? err.stack : err);
+  process.exit(1);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason && reason.stack ? reason.stack : reason);
+});
+
+console.log('Starting application initialization...');
 
 function signToken(user) {
   return jwt.sign({ id: user.id, email: user.email, role: user.role, name: user.name }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
