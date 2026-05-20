@@ -246,6 +246,10 @@ app.get('/api/dashboard', authenticate, (req, res) => {
   return res.json({ counts, overdue: overdue.total, assigned });
 });
 
+// Health check for platform (Railway) and basic readiness
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
